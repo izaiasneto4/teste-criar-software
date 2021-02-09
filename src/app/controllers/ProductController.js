@@ -1,16 +1,10 @@
 import * as yup from 'yup';
 import Product from '../models/Product';
 
-// title: Sequelize.STRING,
-// price: Sequelize.FLOAT,
-// description: Sequelize.TEXT,
-// category: Sequelize.STRING,
-
-
 class ProductController {
 
   async index(req, res) {
-    const products = Product.findAll();
+    const products = await Product.findAll();
 
     return res.json({
       data: products
@@ -18,9 +12,9 @@ class ProductController {
   }
 
   async create(req, res) {
-    const schema = yup.object.shape({
+    const schema = yup.object().shape({
       title: yup.string().required(),
-      price: yup.number().required().positive().float(),
+      price: yup.number().required().positive(),
       description: yup.string().required(),
       category: yup.string().required(),
     });
@@ -35,9 +29,10 @@ class ProductController {
       return res.status(400).json({ error: 'Product already exists' });
     }
 
-    const { title, price, description, category } = await Product.create(req.body);
+    const { id, title, price, description, category } = await Product.create(req.body);
 
     return res.json({
+      id,
       title,
       price,
       description,
@@ -46,7 +41,15 @@ class ProductController {
   }
 
   async read(req, res) {
+    const product = await Product.findOne({ where: { id: req.params.id } });
 
+    if(product) {
+      return res.json({
+        data: product
+      })
+    } else {
+      return res.status(404).json({ error: 'Product not found' })
+    }
   }
 
   async update(req, res) {
@@ -81,7 +84,24 @@ class ProductController {
   }
 
   async delete(req, res) {
+    const product = await Product.findOne({ where: { id: req.params.id } });
 
+    if(product) {
+      const { id, title } = product;
+      try {
+        await product.destroy();
+
+        return res.json({
+          data: "Product deleted successfully"
+        })
+      } catch(e) {
+        return res.status(500).json({
+          data: "Product could not be deleted"
+        })
+      }
+    } else {
+      return res.status(404).json({ error: 'Product not found' })
+    }
   }
 }
 

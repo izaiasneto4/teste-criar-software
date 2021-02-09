@@ -13,6 +13,9 @@ routes.get('/', (req, res) => {
   })
 })
 
-routes.get('/products', ProductController.index)
+routes.get('/products', ProductController.index);
+routes.get('/products/:id', ProductController.read);
+routes.post('/products', ProductController.create);
+routes.delete('/products/:id', ProductController.delete);
 
 export default routes;
