@@ -1,0 +1,24 @@
+{
+  "name": "teste-criar-software",
+  "version": "1.0.0",
+  "description": "Teste de programaçao para a Criar Software",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izaiasneto4/teste-criar-software.git"
+  },
+  "author": "Izaias Neto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/izaiasneto4/teste-criar-software/issues"
+  },
+  "homepage": "https://github.com/izaiasneto4/teste-criar-software#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sequelize": "^6.5.0"
+  }
+}
