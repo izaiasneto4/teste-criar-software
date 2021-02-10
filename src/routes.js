@@ -8,10 +8,10 @@ import FileController from './app/controllers/FileController';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.get('/products', ProductController.index);
-routes.get('/products/:id', ProductController.read);
-routes.post('/products', ProductController.create);
-routes.delete('/products/:id', ProductController.delete);
+routes.get('/api/products', ProductController.index);
+routes.get('/api/products/:id', ProductController.read);
+routes.post('/api/products', ProductController.create);
+routes.delete('/api/products/:id', ProductController.delete);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
