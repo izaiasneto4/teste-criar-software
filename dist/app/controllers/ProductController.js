@@ -1,10 +1,10 @@
-import * as yup from 'yup';
-import Product from '../models/Product';
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _yup = require('yup'); var yup = _interopRequireWildcard(_yup);
+var _Product = require('../models/Product'); var _Product2 = _interopRequireDefault(_Product);
 
 class ProductController {
 
   async index(req, res) {
-    const products = await Product.findAll();
+    const products = await _Product2.default.findAll();
 
     return res.json({
       data: products
@@ -23,13 +23,13 @@ class ProductController {
       return res.status(400).json({ error: "Validation failed" });
     }
 
-    const productExists = await Product.findOne({ where: { title: req.body.title } });
+    const productExists = await _Product2.default.findOne({ where: { title: req.body.title } });
 
     if(productExists) {
       return res.status(400).json({ error: 'Product already exists' });
     }
 
-    const { id, title, price, description, category } = await Product.create(req.body);
+    const { id, title, price, description, category } = await _Product2.default.create(req.body);
 
     return res.json({
       id,
@@ -41,7 +41,7 @@ class ProductController {
   }
 
   async read(req, res) {
-    const product = await Product.findOne({ where: { id: req.params.id } });
+    const product = await _Product2.default.findOne({ where: { id: req.params.id } });
 
     if(product) {
       return res.json({
@@ -64,7 +64,7 @@ class ProductController {
       return res.status(400).json({ error: "Validation failed" });
     }
 
-    const productExists = await Product.findOne({ where: { title: req.body.title } });
+    const productExists = await _Product2.default.findOne({ where: { title: req.body.title } });
 
     if(productExists) {
       try {
@@ -84,7 +84,7 @@ class ProductController {
   }
 
   async delete(req, res) {
-    const product = await Product.findOne({ where: { id: req.params.id } });
+    const product = await _Product2.default.findOne({ where: { id: req.params.id } });
 
     if(product) {
       const { id, title } = product;
@@ -105,4 +105,4 @@ class ProductController {
   }
 }
 
-export default new ProductController();
+exports. default = new ProductController();

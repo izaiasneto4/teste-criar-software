@@ -1,4 +1,4 @@
-module.exports = {
+"use strict";module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.addColumn('products', 'avatar_id', {
       type: Sequelize.INTEGER,
