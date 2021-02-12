@@ -8,6 +8,7 @@ import FileController from './app/controllers/FileController';
 const routes = new Router();
 const upload = multer(multerConfig);
 
+routes.get('/', (req, res) => res.json({ data: "Hello World!" }));
 routes.get('/api/products', ProductController.index);
 routes.get('/api/products/:id', ProductController.read);
 routes.post('/api/products', ProductController.create);
