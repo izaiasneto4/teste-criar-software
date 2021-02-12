@@ -6,9 +6,9 @@ class ProductController {
   async index(req, res) {
     const products = await Product.findAll();
 
-    return res.json({
-      data: products
-    })
+    return res.json(
+      products
+    )
   }
 
   async create(req, res) {
@@ -44,8 +44,14 @@ class ProductController {
     const product = await Product.findOne({ where: { id: req.params.id } });
 
     if(product) {
+      const { id, title, string, price, description, category } = product;
       return res.json({
-        data: product
+        id,
+        title,
+        string, 
+        price, 
+        description, 
+        category
       })
     } else {
       return res.status(404).json({ error: 'Product not found' })

@@ -4,6 +4,7 @@
   "description": "Teste de programaçao para a Criar Software",
   "main": "server.js",
   "scripts": {
+    "prod": "node dist/server.js",
     "dev": "nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports"
   },
